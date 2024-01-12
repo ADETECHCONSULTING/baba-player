@@ -1,0 +1,11 @@
+<header class="flex justify-between items-center py-4">
+    <h1 class="text-4xl font-bold">Home</h1>
+    <div class="relative">
+        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        <input type="search" placeholder="Search" class="bg-gray-900 text-white rounded-full pl-10 pr-4 py-2 outline-none w-64">
+    </div>
+    <i class="fab fa-google-drive" (click)="openModal()"></i>
+    <app-google-api-key-modal 
+    (apiKeySubmit)="onApiKeySubmit($event)"
+    *ngIf="isModalOpen"/>
+</header>
