@@ -17,7 +17,7 @@ const loadFilesFailure = createAction(
   props<{ error: any }>()
 );
 
-export const GoogleDriveActions = {
+export const StorageActions = {
   saveApiKey,
   loadFiles,
   loadFilesSuccess,

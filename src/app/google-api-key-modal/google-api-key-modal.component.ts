@@ -3,7 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, of, take } from 'rxjs';
-import { GoogleDriveSelectors } from '../store/selectors/google-drive.selectors';
+import { StorageSelectors } from '../store/selectors/storage.selectors';
 
 @Component({
   selector: 'app-google-api-key-modal',
@@ -17,12 +17,12 @@ export class GoogleApiKeyModalComponent {
   @Output() apiKeySubmit = new EventEmitter<string>();
 
   constructor(private store: Store) {
-    this.apiKey$ = this.store.select(GoogleDriveSelectors.getApiKey);
+    this.apiKey$ = this.store.select(StorageSelectors.getApiKey);
   }
 
   closeModal() {
     this.store
-      .select(GoogleDriveSelectors.getApiKey)
+      .select(StorageSelectors.getApiKey)
       .pipe(take(1))
       .subscribe((apiKey) => {
         this.apiKeySubmit.emit(apiKey);

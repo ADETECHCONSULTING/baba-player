@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class GoogleDriveService {
+export class StorageService {
   private readonly apiUrl = 'https://www.googleapis.com/drive/v3';
   private apiKey: string = '';
 
