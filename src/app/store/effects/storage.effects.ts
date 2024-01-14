@@ -15,7 +15,7 @@ export class StorageEffects {
       concatLatestFrom(() => this.store.select(StorageSelectors.getApiKey)),
       mergeMap(([, apiKey]) => {
         this.storageService.setApiKey(apiKey);
-        return this.storageService.getFiles().pipe(
+        return this.storageService.listMp3Files('').pipe(
           map((files) => StorageActions.loadFilesSuccess({ files: files })),
           catchError((error) =>
             of(StorageActions.loadFilesFailure({ error: error }))

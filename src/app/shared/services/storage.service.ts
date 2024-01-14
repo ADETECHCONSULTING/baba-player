@@ -1,22 +1,26 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Dropbox } from 'dropbox';
+import { catchError, from, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StorageService {
-  private readonly apiUrl = 'https://www.googleapis.com/drive/v3';
-  private apiKey: string = '';
+  private dbx?: Dropbox;
 
-  constructor(private http: HttpClient) {}
-
-  setApiKey(apiKey: string) {
-    this.apiKey = apiKey;
+  setApiKey(apiKey: string): void {
+    this.dbx = new Dropbox({ accessToken: apiKey });
   }
 
-  getFiles(): Observable<any[]> {
-    const url = `${this.apiUrl}/files?key=${this.apiKey}`;
-    return this.http.get<any[]>(url);
+  listMp3Files(path: string) {
+    return from(this.dbx!.filesListFolder({ path: path })).pipe(
+      map((response) =>
+        response.result.entries.filter((file) => file.name.endsWith('.mp3'))
+      ),
+      catchError((error) => {
+        console.error(error);
+        return [];
+      })
+    );
   }
 }
