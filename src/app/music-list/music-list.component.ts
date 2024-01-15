@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { StorageSelectors } from '../store/selectors/storage.selectors';
+import { MusicListItemComponent } from './music-list-item/music-list-item.component';
 
 @Component({
   selector: 'app-music-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MusicListItemComponent],
   templateUrl: './music-list.component.html',
   styleUrls: ['./music-list.component.css'],
 })
